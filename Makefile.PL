@@ -7,7 +7,7 @@ WriteMakefile(
     NAME         => 'Image::Hash',
     VERSION_FROM => 'lib/Image/Hash.pm', # finds \$VERSION
     AUTHOR       => 'Runar Buvik (runarb@gmail.com)',
-    ABSTRACT     => 'An image hashing library to calculate an images average hash, perception has and difference has.',
+    ABSTRACT     => 'An image hashing library to calculate an images average hash, perception hash and difference hash.',
     PREREQ_PM    => {
                      'Test::Simple' => 0.44,
 					 'List::Util'	=> 0,
