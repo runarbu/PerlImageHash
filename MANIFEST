@@ -6,3 +6,7 @@ Changes
 Makefile.PL
 lib/Image/Hash.pm
 t/001_load.t
+eg/print-hashes-for-files.pl
+eg/print-reduced-image.pl
+eg/synopsis.pl
+eg/images/FishEyeViewofAtlantis.jpg
