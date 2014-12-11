@@ -13,5 +13,6 @@ WriteMakefile(
 					 'List::Util'	=> 0,
 					 'File::Slurp'	=> 0,
 					 'GD'			=> 0,
+					 'Carp'			=> 0,
                     },
 );
