@@ -1,5 +1,10 @@
 Revision history for Perl module Image::Hash
 
+0.02 Thu Des 11 14:16:50 2014
+    - Replaced some die() calls with carp/croak
+    - Replaced switch with plane old if/elsif/else to make it more compatible with older version of Perl.
+    - Some cosmetic changes in the documentation
+
 0.01 Thu Nov 13 07:27:51 2014
     - original version; created by ExtUtils::ModuleMaker 0.52
 
