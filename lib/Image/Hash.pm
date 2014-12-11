@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use List::Util qw(sum);
-use Switch;
 use Carp;
 
 our $VERSION = '0.01';
@@ -67,13 +66,19 @@ sub new {
 	$self->{'image'} = shift;
 	$self->{'module'} = shift;
 	
-	# Try to load the image handler the user asked for
 	if ($self->{'module'}) {
-		switch ($self->{'module'}) {
-			case "GD"			{ require GD; }
-			case "ImageMagick"	{ require Image::Magick; }
-			case "Imager"		{ require Imager; }
-			else				{ croak("Unknown mudule: '" . $self->{'module'} . "'."); }
+		# Try to load the image handler the user asked for
+		if ($self->{'module'} eq "GD") {
+			require GD;
+		}
+		elsif ($self->{'module'} eq "ImageMagick" || $self->{'module'} eq "Image::Magick") {
+			require Image::Magick;
+		}
+		elsif ($self->{'module'} eq "Imager") {
+			require Imager;
+		}
+		else {
+			croak("Unknown mudule: '" . $self->{'module'} . "'. Please use either GD, ImageMagick or Imager as module.");
 		}
 	}
 	else {
