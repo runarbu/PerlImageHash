@@ -35,7 +35,7 @@ Depending on what is available on your system Image::Hash will use GD, Image::Ma
 
 =head1 CONSTRUCTOR METHODS
 
-  my $ihash = Image::Hash->new($image, [ $module ]);
+  my $ihash = Image::Hash->new($image [, $module ]);
   
 The first argument is a scalar with a binary representation of an image.
 
