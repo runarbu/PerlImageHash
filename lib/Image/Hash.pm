@@ -6,7 +6,7 @@ use warnings;
 use List::Util qw(sum);
 use Carp;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 NAME
@@ -46,7 +46,7 @@ Depending on what is available on your system Image::Hash will use GD, Image::Ma
 
 =head1 CONSTRUCTOR METHODS
 
-  my $ihash = Image::Hash->new($image, [ $module ]);
+  my $ihash = Image::Hash->new($image [, $module ]);
   
 The first argument is a scalar with a binary representation of an image.
 
