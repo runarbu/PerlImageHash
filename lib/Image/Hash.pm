@@ -103,7 +103,7 @@ sub new {
 	if ($self->{'module'} eq 'GD') {
 		$self->{'im'} = GD::Image->new( $self->{'image'} );
 		if ($self->{'im'} == 0) {
-			warn("Can't make image from this value.");
+			carp("Can't make image from this value.");
 			return undef;
 		}
 		$self->{'reduse'} = \&reduse_GD;
@@ -113,7 +113,7 @@ sub new {
 		$self->{'im'} = Image::Magick->new();
 		my $ret = $self->{'im'}->BlobToImage( $self->{'image'} );
 		if ($ret == 0) {
-			warn("Can't make image from this value.");
+			carp("Can't make image from this value.");
 			return undef;
 		}
 		$self->{'reduse'} = \&reduse_ImageMagick;
@@ -122,7 +122,7 @@ sub new {
 	elsif ($self->{'module'} eq 'Imager') {
 		$self->{'im'} = Imager->new(data=>$self->{'image'});
 		if ($self->{'im'} == 0) {
-			warn("Can't make image from this value.");
+			carp("Can't make image from this value.");
 			return undef;
 		}
 		$self->{'reduse'} = \&reduse_Imager;
