@@ -183,7 +183,7 @@ sub reduse_Imager {
 
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
 
-	$self->{ $opt{'im'} } = $self->{ $opt{'im'} }->scale(xpixels=>30,ypixels=>30);
+	$self->{ $opt{'im'} } = $self->{ $opt{'im'} }->scale(xpixels=>$xs,ypixels=>$ys);
 }
 
 # Return the pixel values for an image when using GD
