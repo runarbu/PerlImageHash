@@ -179,17 +179,14 @@ sub reduse_ImageMagick {
 # Reduse the size of an image using Imager
 sub reduse_Imager {
 	my ($self, %opt) = @_;
-	$self->{ $opt{'im'} } = $self->{'im'};
-
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
 
-	$self->{ $opt{'im'} } = $self->{ $opt{'im'} }->scale(xpixels=>30,ypixels=>30);
+	$self->{ $opt{'im'} } = $self->{ 'im' }->scale(xpixels => $xs, ypixels => $ys, type => "nonprop");
 }
 
 # Return the pixel values for an image when using GD
 sub pixels_GD {
 	my ($self, %opt) = @_;
-	$self->{ $opt{'im'} } = $self->{'im'};
 	
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
 	
@@ -210,14 +207,11 @@ sub pixels_GD {
 # Return the pixel values for an image when using Image::Magick
 sub pixels_ImageMagick {
 	my ($self, %opt) = @_;
-	$self->{ $opt{'im'} } = $self->{'im'};
-	
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
 	
 	my @pixels;
 	for(my $y=0; $y<$ys;$y++) {
 			for(my $x=0; $x<$xs;$x++) {
-
 					my @pixel = $self->{ $opt{'im'} }->GetPixel(x=>$x,y=>$y,normalize => 0);
 					my $grey = $pixel[0]*0.3 + $pixel[1]*0.59 + $pixel[2]*0.11;
 					push(@pixels, $grey);
@@ -235,21 +229,16 @@ sub pixels_ImageMagick {
 # Return the pixel values for an image when using Imager
 sub pixels_Imager {
 	my ($self, %opt) = @_;
-	$self->{ $opt{'im'} } = $self->{'im'};
-	
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
-	
 	my @pixels;
 	for(my $y=0; $y<$ys;$y++) {
 			for(my $x=0; $x<$xs;$x++) {
-
-					my @color = $self->{ $opt{'im'} }->getpixel(x => $x, y => $y);
-					my ($red, $green, $blue, $alpha) = $color[0]->rgba();
+					my $c = $self->{ $opt{'im'} }->getpixel(x => $x, y => $y);
+					my ($red, $green, $blue, $alpha) = $c->rgba();
 					my $grey = $red*0.3 + $green*0.59 + $blue*0.11;
 					push(@pixels, $grey);
 			}
 	}
-	
 	return @pixels;
 }
 
