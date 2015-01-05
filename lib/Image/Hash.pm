@@ -108,6 +108,7 @@ sub new {
 		}
 		$self->{'reduse'} = \&reduse_GD;
 		$self->{'pixels'} = \&pixels_GD;
+		$self->{'blob'}   = \&blob_GD;
 	}
 	elsif ($self->{'module'} eq 'ImageMagick') {
 		$self->{'im'} = Image::Magick->new();
@@ -118,6 +119,8 @@ sub new {
 		}
 		$self->{'reduse'} = \&reduse_ImageMagick;
 		$self->{'pixels'} = \&pixels_ImageMagick;
+		$self->{'blob'}   = \&blob_ImageMagick;
+
 	}
 	elsif ($self->{'module'} eq 'Imager') {
 		$self->{'im'} = Imager->new(data=>$self->{'image'});
@@ -127,6 +130,7 @@ sub new {
 		}
 		$self->{'reduse'} = \&reduse_Imager;
 		$self->{'pixels'} = \&pixels_Imager;
+		$self->{'blob'}   = \&blob_Imager;
 	}
 	
 
@@ -190,6 +194,33 @@ sub reduse_Imager {
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
 
 	$self->{ $opt{'im'} } = $self->{ 'im' }->scale(xpixels => $xs, ypixels => $ys, type => "nonprop");
+}
+
+
+# Return the image as a blob using GD
+sub blob_GD {
+        my ($self, %opt) = @_;
+
+	return $self->{ $opt{'im'} }->png;
+}
+
+# Return the image as a blob using Image::Magick
+sub blob_ImageMagick {
+        my ($self, %opt) = @_;
+
+	my $blobs = $self->{ $opt{'im'} }->ImageToBlob(magick => 'png');
+
+	return $blobs;
+}
+
+# Return the image as a blob using Imager
+sub blob_Imager {
+        my ($self, %opt) = @_;
+	
+	my $data;
+	$self->{ $opt{'im'} }->write(data => \$data, type => 'png') or carp $self->{ $opt{'im'} }->errstr;
+
+	return $data;
 }
 
 # Return the pixel values for an image when using GD
@@ -530,12 +561,10 @@ sub reducedimage {
 
 
 	if(!$self->{ $opt{'im'} }) {
-		$self->reduse( %opt );
+		$self->{'reduse'}->($self, %opt );
 	}
 
-	my $data;
-	$self->{ $opt{'im'} }->write(data => \$data, type => 'png') or carp $self->{ $opt{'im'} }->errstr;
-	return $data;
+	$self->{'blob'}->($self, %opt );
 }
 
 =head1 EXAMPLES
