@@ -119,6 +119,8 @@ Please see the C<eg/> directory for further examples.
 
 =head1 BUGS
 
+Image::Hash support different back ends (GD, Image::Magick or Imager), but because the different back ends work slightly different they will not produce the same hash for the same image. More info is available at https://github.com/runarbu/PerlImageHash/blob/master/Hash_differences.md .
+
 =head1 AUTHOR
 
     Runar Buvik
