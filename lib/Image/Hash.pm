@@ -164,7 +164,15 @@ sub reduse_GD {
 
 	my ($xs, $ys) = split(/x/, $opt{'geometry'});
 
-	$self->{ $opt{'im'} } = $self->{ $opt{'im'} }->copyResized($self->{ $opt{'im'} }, 0, 0, 0, 0, $xs, $ys, $self->{ $opt{'im'} }->getBounds);
+	my $dest = GD::Image->new($xs, $ys);
+
+	$dest->copyResampled($self->{ $opt{'im'} },
+		0, 0, 		# (destX, destY)
+		0, 0, 		# (srcX,  srxY )
+		$xs, $ys, 	# (destX, destY)
+		$self->{ $opt{'im'} }->width, $self->{ $opt{'im'} }->height
+	);
+	$self->{ $opt{'im'} } = $dest;
 }
 
 # Reduse the size of an image using Image::Magick
