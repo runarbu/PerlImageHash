@@ -471,6 +471,47 @@ sub phash {
 	}
 }
 
+=head1 HELPER
+
+=head2 greytones
+
+  $ihash->greytones();
+  $ihash->greytones('geometry' => '8x8');
+
+Return the number of different shades of grey after the image are converted to grey tones. The number of shades can be used to indicate the complexity of an image, and exclude images that has a very low complexity.
+
+For example, all images with only a single color will be reduced to an image with a single grey color and thus give the same hash.
+
+=cut
+sub greytones {
+	my ($self, %opt) = @_;
+
+	$opt{'geometry'} ||= '8x8';
+	$opt{'im'} ||= 'im_' . $opt{'geometry'};
+
+	if(!$self->{ $opt{'im'} }) {
+		$self->{'reduse'}->($self, %opt );
+	}
+
+	my @pixels = $self->{'pixels'}->($self, %opt );
+	
+	# aHash specific code
+	
+	# Find the mean values of all the values in the array
+	my $m = sum(@pixels)/@pixels; 
+
+	my %seen;
+	my $count = 0;
+	foreach my $p (@pixels) {
+		if ($seen{$p}) {next;}
+		$seen{$p} = 1;
+		$count++;
+
+	}
+	
+	return $count;
+}
+
 =head1 DEBUGGING
 
 Functions useful for debug purposes. 

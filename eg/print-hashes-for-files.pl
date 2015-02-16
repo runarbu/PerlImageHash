@@ -50,6 +50,13 @@ while (my $file = shift @ARGV) {
 	}
 
 
+	print "\ngreytones:\n";
+	for my $module ( @modules ) {
+		my $ihash = Image::Hash->new($image, $module);
+		printf("%-15s: %s\n", $module, $ihash->greytones() );
+	}
+
+
 	print "\ndump with aHash highlighted:\n";
 	for my $module ( @modules ) {
 		my $ihash = Image::Hash->new($image, $module);
