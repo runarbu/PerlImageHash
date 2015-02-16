@@ -72,6 +72,17 @@ Calculate the Perceptual Hash
 	
 Return an array of binary values in array context and a hex representative in scalar context.
 
+=head1 HELPER
+
+=head2 greytones
+
+  $ihash->greytones();
+  $ihash->greytones('geometry' => '8x8');
+
+Return the number of different shades of grey after the image are converted to grey tones. The number of shades can be used to indicate the complexity of an image, and exclude images that has a very low complexity.
+
+For example, all images with only a single color will be reduced to an image with a single grey color and thus give the same hash.
+
 =head1 DEBUGGING
 
 Functions useful for debug purposes. 
