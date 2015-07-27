@@ -146,7 +146,7 @@ sub new {
 # Borrowed from http://www.perlmonks.org/index.pl?node_id=644225
 sub b2h {
     my $num   = shift;
-    my $WIDTH = 32;
+    my $WIDTH = 4;
     my $index = length($num) - $WIDTH;
     my $hex = '';
     do {
