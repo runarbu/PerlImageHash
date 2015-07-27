@@ -73,6 +73,7 @@ sub new {
 		}
 		elsif ($self->{'module'} eq "ImageMagick" || $self->{'module'} eq "Image::Magick") {
 			require Image::Magick;
+			$self->{'module'} = 'ImageMagick';
 		}
 		elsif ($self->{'module'} eq "Imager") {
 			require Imager;
