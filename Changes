@@ -1,5 +1,8 @@
 Revision history for Perl module Image::Hash
 
+0.06 Sun Aug 16 16:00.00 2015
+    - Only test the Imager module if we also have JPEG support for Imager.
+
 0.04 Mon Jan 15 13:39.00 2015
     - Support for dumping the reduced image from GD and Imager also
     - Made the pixel_* subroutines use the reduced image

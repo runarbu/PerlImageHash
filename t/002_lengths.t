@@ -24,7 +24,7 @@ if (!$@) {$have{'GD'} = 1;}
 eval { require Image::Magick};
 if (!$@) {$have{'Image::Magick'} = 1;}
 
-eval { require Imager};
+eval { require Imager; require Imager::File::JPEG};
 if (!$@) {$have{'Imager'} = 1;}
 
 
