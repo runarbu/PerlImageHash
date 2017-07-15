@@ -15,4 +15,16 @@ WriteMakefile(
 					 'GD'			=> 0,
 					 'Carp'			=> 0,
                     },
+    META_MERGE => {
+	'meta-spec' => {
+	    version => 2,
+	},
+        resources => {
+            repository => {
+		type => 'git',
+		url => "git://github.com/runarbu/PerlImageHash.git",
+		web => 'https://github.com/runarbu/PerlImageHash',
+	    },
+        },
+    },
 );
