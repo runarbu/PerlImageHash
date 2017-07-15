@@ -40,7 +40,7 @@ Image::Hash - Perceptual image hashing [aHash, dHash, pHash].
 
 Image::Hash allows you to calculate the average hash, difference hash and perception hash an image.
 
-Depending on what is available on your system Image::Hash will use GD, Image::Magick or Imager to interact with your image.
+Depending on what is available on your system Image::Hash will use L<GD>, L<Image::Magick> or L<Imager> to interact with your image.
 
 
 
@@ -51,7 +51,7 @@ Depending on what is available on your system Image::Hash will use GD, Image::Ma
 The first argument is a scalar with a binary representation of an image.
 
 You may also optionally specify a second argument of "GD", "ImageMagick" or "Imager" to force Image::Hash to use the specific image module when it interacts with the image.
-The different image modules may give direct hashes for the same image. Using GD normally hives the best results, and are is highly recommended.
+The different image modules may give direct hashes for the same image. Using GD normally gives the best results, and is highly recommended.
 
 
 =cut
@@ -94,7 +94,7 @@ sub new {
 			$self->{'module'} = "Imager";
 		}
 		else {
-			croak("No image maudule avalibal. Can't load  GD, ImageMagic or Imager.");
+			croak("No image module available. Can't load  GD, ImageMagic or Imager.");
 		}
 	}
 	
@@ -291,7 +291,7 @@ sub pixels_Imager {
 
 Calculate the Average Hash
 	
-Return an array of binary values in array context and a hex representative in scalar context.
+Return an array of binary values in array context and a hex representation in scalar context.
 
 =cut
 sub ahash {
@@ -536,7 +536,7 @@ Functions useful for debug purposes.
           [ 176 (1), 180 (1), 174 (1), 183 (1), 176 (1), 176 (1), 135 (0), 146 (0) ],
           [ 162 (1), 171 (1),  99 (0), 149 (0), 129 (0), 162 (1), 140 (0), 146 (0) ])
 
-Dump the array used when generating hashes. Option 'hash' may be specified to show with pixel has witch value in the hash.
+Dump the array used when generating hashes. Option 'hash' may be specified to show which pixel has which value in the hash.
 
 =cut	  
 sub dump {
@@ -582,7 +582,7 @@ sub dump {
   use Image::Hash;
   use File::Slurp;
 
-  my $file = shift @ARGV or die("Pleas spesyfi a file to read!");
+  my $file = shift @ARGV or die("Please specify a file to read!");
 
   my $image = read_file( $file, binmode => ':raw' ) ;
 
@@ -615,18 +615,18 @@ Please see the C<eg/> directory for further examples.
 
 =head1 BUGS
 
-Image::Hash support different back ends (GD, Image::Magick or Imager), but because the different back ends work slightly different they will not produce the same hash for the same image. More info is available at https://github.com/runarbu/PerlImageHash/blob/master/Hash_differences.md .
+Image::Hash supports different back ends (GD, Image::Magick or Imager), but because the different back ends work slightly different they will not produce the same hash for the same image. More info is available at L<https://github.com/runarbu/PerlImageHash/blob/master/Hash_differences.md>.
 
 =head1 AUTHOR
 
     Runar Buvik
     CPAN ID: RUNARB
     runarb@gmail.com
-    http://www.runarb.com
+    L<http://www.runarb.com>
 
 =head1 Git
 
-https://github.com/runarbu/PerlImageHash
+L<https://github.com/runarbu/PerlImageHash>
 
 =head1 COPYRIGHT
 
